@@ -1,0 +1,135 @@
+<app-navbar></app-navbar>
+
+<div
+  style="
+    display: inline-flex;
+    align-items: baseline;
+    width: 100%;
+    vertical-align: middle;
+  "
+>
+  <mat-form-field appearance="outline" style="padding: 2%; width: 88%">
+    <mat-label>Filtrar por Módulo</mat-label>
+    <mat-select
+      (selectionChange)="onModuleChangeFilter($event.value)"
+      style="flex-grow: 1"
+    >
+      <mat-option [value]="">Todos</mat-option>
+      <!-- Opción para mostrar todos los eventos -->
+      <mat-option *ngFor="let module of modules" [value]="module.name">
+        <span
+          class="color-circle"
+          [ngStyle]="{ 'background-color': module.color || '#007bff' }"
+        ></span>
+        {{ module.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- Botón de estadísticas -->
+  <button
+    mat-mini-fab
+    [routerLink]="'/stats'"
+    aria-label="Estadísticas"
+    style="margin-right: 10px"
+  >
+    <mat-icon>bar_chart</mat-icon>
+  </button>
+</div>
+
+<button
+  *ngIf="isZoomedIn"
+  mat-raised-button
+  color="primary"
+  (click)="backToMonthView()"
+  class="back-to-month-btn"
+  style="margin-left: 10px"
+>
+  <mat-icon>calendar_today</mat-icon>
+  Volver a vista de mes
+</button>
+<full-calendar
+  #calendar
+  [options]="calendarOptions"
+  (dateClick)="handleDateClick($event)"
+  style="padding: 10px"
+></full-calendar>
+
+<!-- Modal -->
+<div #modal>
+  <div *ngIf="selectedDate" class="form-container">
+    <div class="modal-content">
+      <h5>
+        Seleccionar Módulo, Cliente, Día y Hora para el {{ selectedDate }}
+      </h5>
+
+      <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+        <mat-form-field appearance="outline">
+          <mat-label>Módulo</mat-label>
+          <mat-select
+            formControlName="module"
+            (selectionChange)="onModuleChange($event.value)"
+          >
+            <mat-option *ngFor="let module of modules" [value]="module.name">
+              <span
+                class="color-circle"
+                [ngStyle]="{ 'background-color': module.color || '#007bff' }"
+              ></span>
+              {{ module.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <!-- Input para buscar clientes -->
+          <input
+            matInput
+            placeholder="Buscar Cliente"
+            formControlName="searchClient"
+            (input)="filterClients()"
+          />
+
+          <!-- Selección de cliente -->
+          <mat-select #sclients formControlName="client">
+            <mat-option *ngFor="let client of filteredClients" [value]="client">
+              {{ client }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Selector de día -->
+        <mat-form-field appearance="outline" class="non-editable-select">
+          <mat-label>Día</mat-label>
+          <mat-select
+            formControlName="day"
+            (selectionChange)="onDayChange($event.value)"
+          >
+            <mat-option *ngFor="let day of availableDays" [value]="day">{{
+              day
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Selector de hora -->
+        <mat-form-field appearance="outline">
+          <mat-label>Hora</mat-label>
+          <mat-select formControlName="hour">
+            <mat-option *ngFor="let hour of availableHours" [value]="hour">{{
+              hour
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="button-container">
+          <!-- Botones a la izquierda y derecha en la misma fila -->
+          <a mat-button color="warn" (click)="cancel()">Cancelar</a>
+          <button mat-raised-button color="primary" type="submit">
+            Guardar Cita
+          </button>
+        </div>
+      </form>
+
+      <!-- Botón de Cerrar / Cancelar -->
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

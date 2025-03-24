@@ -1,0 +1,149 @@
+.client-form {
+  max-width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+.module-name {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  flex-grow: 1;
+  text-align: center;
+}
+
+button.mat-icon-button {
+  margin-right: 20px;
+}
+mat-form-field {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.entries-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.entry-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.text {
+  flex-grow: 1;
+  font-size: 16px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-line;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.buttons button {
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.edit-area {
+  width: 100%;
+  min-height: 60px;
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+@media (max-width: 600px) {
+  .entry-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .edit-area {
+    min-height: 80px;
+    font-size: 14px;
+  }
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.image-preview {
+  position: relative;
+  margin: 10px;
+}
+
+.preview-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.preview-image:hover {
+  transform: scale(1.1);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.full-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.full-image {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 10px;
+}

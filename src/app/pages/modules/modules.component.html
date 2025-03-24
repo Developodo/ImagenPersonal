@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+
+<div class="modules-container">
+    @for (module of modules; track module) {
+        <a [routerLink]="['/clients', module.name]" class="module-card">
+        <img [src]="module.image" alt="Imagen del módulo">
+        <h3 style="color:#ff4081;font-size: x-large !important;">{{ module.name }}</h3>
+      </a>
+    }
+  </div>
+<app-footer></app-footer>

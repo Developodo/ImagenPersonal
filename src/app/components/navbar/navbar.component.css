@@ -1,0 +1,26 @@
+
+.custom-toolbar {
+    height: 80px; /* Establece la altura de la barra de herramientas */
+    padding: 0 16px; /* Ajusta el padding lateral para que el contenido no quede pegado al borde */
+    background-color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sombra difusa y suave */
+  }
+  
+  
+  
+  .logo {
+    height: 100%; /* Asegura que el logo ocupe toda la altura de la barra */
+    max-height: 85px; /* Establece una altura máxima para el logo */
+    width: auto; /* Mantiene la proporción del logo */
+  }
+  
+  .flex-spacer {
+    flex-grow: 1;
+  }
+  
+  mat-toolbar button {
+    height: 100%; /* Hace que el botón ocupe toda la altura de la barra */
+    display: flex;
+    align-items: center; /* Centra el texto dentro del botón */
+  }
+  

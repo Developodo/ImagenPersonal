@@ -1,0 +1,110 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="moduleList.length > 0">
+  <button
+    style="margin-left: 5px; border-radius: 5px"
+    (click)="saveAllModulesHours()"
+  >
+    Guardar Todos los Horarios
+  </button>
+
+  <div class="schedule">
+    <!-- Iterar sobre cada módulo -->
+    @for (module of moduleList; track module) {
+    <div class="module" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)">
+      <div
+        class="module-item"
+        style="
+          margin-top: 30px;
+          border-top: 1px solid rgb(235, 235, 235);
+          padding: 5px;
+        "
+      >
+        <div
+          class="avatar"
+          [ngStyle]="{ 'background-image': 'url(' + module.image + ')' }"
+        ></div>
+        <h3 style="font-size: large">{{ module.name }}</h3>
+        <div
+          class="color-box"
+          [ngStyle]="{ 'background-color': module.color }"
+        ></div>
+      </div>
+
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            @for (day of daysOfWeek; track day) {
+            <th>{{ day | firstletter }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Fila para "Mañanas" con acordeón -->
+          <tr (click)="toggleMorning(module.name)" class="accordion-header">
+            <td [attr.colspan]="daysOfWeek.length + 1">
+              <strong>Mañanas</strong> ({{
+                showMorning[module.name] ? "−" : "+"
+              }})
+            </td>
+          </tr>
+
+          <!-- Horarios de la mañana -->
+          @if (showMorning[module.name]) { @for (timeSlot of timeSlots; track
+          timeSlot) { @if (isMorning(timeSlot)) {
+          <tr>
+            <td>{{ timeSlot }}</td>
+            @for (day of daysOfWeek; track day) {
+            <td>
+              <input
+                type="checkbox"
+                [checked]="isTimeSlotSelected(module.name, day, timeSlot)"
+                (change)="toggleTimeSlot(module.name, day, timeSlot)"
+                class="time-slot-checkbox"
+              />
+            </td>
+            }
+          </tr>
+          } } }
+
+          <!-- Fila para "Tardes" con acordeón -->
+          <tr (click)="toggleAfternoon(module.name)" class="accordion-header">
+            <td [attr.colspan]="daysOfWeek.length + 1">
+              <strong>Tardes</strong> ({{
+                showAfternoon[module.name] ? "−" : "+"
+              }})
+            </td>
+          </tr>
+
+          <!-- Horarios de la tarde -->
+          @if (showAfternoon[module.name]) { @for (timeSlot of timeSlots; track
+          timeSlot) { @if (isAfternoon(timeSlot)) {
+          <tr>
+            <td>{{ timeSlot }}</td>
+            @for (day of daysOfWeek; track day) {
+            <td>
+              <input
+                type="checkbox"
+                [checked]="isTimeSlotSelected(module.name, day, timeSlot)"
+                (change)="toggleTimeSlot(module.name, day, timeSlot)"
+                class="time-slot-checkbox"
+              />
+            </td>
+            }
+          </tr>
+          } } }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+
+  <button
+    style="margin-left: 5px; border-radius: 5px; margin-bottom: 10px"
+    (click)="saveAllModulesHours()"
+  >
+    Guardar Todos los Horarios
+  </button>
+</div>
+<app-footer></app-footer>

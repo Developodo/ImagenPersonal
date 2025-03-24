@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.fc-daygrid-day-number {
+    font-size: 1.5rem !important; /* Ajusta el tamaño según necesites */
+    font-weight: bold;
+  }
+.mdc-snackbar__surface  {
+    background-color: #2196F3 !important; /* Azul Material */
+    color: white !important;
+    font-weight: bold;
+  }
+.fc-daygrid-event-harness{
+  /*display: none;*/
+}
+  .event-dot {
+    width: 50px;
+    height: 50px;
+    background-color: #ff4081;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    margin:5px auto -15px auto;
+    cursor: pointer;
+  }
+  .fc-toolbar-title{
+    font-size: 1.4em !important;
+  }
+
+
+
+  /* Ocultar todos los eventos */
+.fc-daygrid-event-harness {
+  display: none;
+}
+
+/* Insertar un contador con un círculo en el contenedor */
+.fc-daygrid-day-events {
+  position: relative; /* Mantiene el posicionamiento correcto */
+  pointer-events: auto !important;
+  cursor: pointer;
+  padding-right: 50px; /* Asegura que el contenido no se superponga con el círculo */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  min-height: 40px !important;
+}
+
+.fc-daygrid-day-events::before {
+  content: attr(data-event-count);
+  position: absolute;
+  top: 50%;
+  right: 5px; /* Ajusta la posición del círculo */
+  transform: translateY(-50%);
+  background-color: #ff4081;
+  border-radius: 50%;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.show{
+  display:block !important;
+}
+
+/* Opcional, ajustar el contenedor si es necesario */
+
+.fc-daygrid-day{
+  cursor: pointer;
+}
+
+.mat-mdc-select-arrow-wrapper{
+  margin-left:8px
+}

@@ -1,0 +1,24 @@
+.error-container {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .error-logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 3em;
+    color: #333;
+  }
+  
+  p {
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  

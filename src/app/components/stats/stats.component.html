@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="form-container">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Seleccionar Curso</mat-label>
+      <mat-select [(value)]="selectedCourse"  (selectionChange)="onCourseChange($event.value)">
+        <mat-option value="2024/2025">2024-2025</mat-option>
+        <mat-option value="2025/2026">2025-2026</mat-option>
+        <mat-option value="2027/2028">2027/2028</mat-option>
+        <mat-option value="2028/2029">2028/2029</mat-option>
+        <mat-option value="2029/2030">2029/2030</mat-option>
+        <mat-option value="2030/2031">2030/2031</mat-option>
+        <mat-option value="2031/2032">2031/2032</mat-option>
+        <mat-option value="2032/2033">2032/2033</mat-option>
+        <mat-option value="2033/2034">2033/2034</mat-option>
+        <mat-option value="2034/2035">2034/2035</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="selectedCourse" class="form-field">
+      <mat-label>Filtrar por Mes</mat-label>
+      <mat-select (selectionChange)="onMonthChange($event.value)">
+        <mat-option value="">Curso Completo</mat-option>
+        <mat-option *ngFor="let month of months" [value]="month.value">
+          {{ month.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+    <button mat-raised-button color="primary" (click)="exportToPDF()" class="export-btn">Exportar a PDF</button>
+  </div>
+
+  <div class="chart-container">
+    <div #chart class="chart">
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="'cool'"
+        [results]="filteredCitas"
+        [gradient]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        xAxisLabel="Módulo"
+        [showYAxisLabel]="true"
+        yAxisLabel="Número de Citas">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

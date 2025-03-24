@@ -1,0 +1,15 @@
+<h2 mat-dialog-title class="event-dialog-title">Detalles del Evento</h2>
+
+<mat-dialog-content class="event-dialog-content">
+  <div class="event-detail">
+    <p><strong>Cliente:</strong> {{ data.event.extendedProps?.client || 'N/A' }}</p>
+    <p><strong>Fecha y hora:</strong> {{ data.event.start | date:'EEEE, d \'de\' MMMM \'de\' y, HH:mm':'es' }}</p>
+
+    <p><strong>Módulo:</strong> {{ data.event.extendedProps?.module || 'N/A' }}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="event-dialog-actions">
+  <button mat-button class="cancel-button" (click)="close()">Cerrar</button>
+  <button mat-button color="warn" class="delete-button" (click)="deleteEvent()">Eliminar</button>
+</mat-dialog-actions>

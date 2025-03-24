@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .form-container {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  .form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .export-btn {
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+  }
+  
+  .chart-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .chart {
+    width: 100%;
+    max-width: 900px;
+  }
+  
+  @media (max-width: 768px) {
+    .form-container {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  
+    .export-btn {
+      width: 100%;
+      padding: 10px 0;
+    }
+  
+    .chart-container {
+      padding: 0 10px;
+    }
+  
+    .chart {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-container {
+      padding: 0 15px;
+    }
+  
+    .export-btn {
+      width: 100%;
+    }
+  
+    .chart-container {
+      padding: 0 5px;
+    }
+  }
+  

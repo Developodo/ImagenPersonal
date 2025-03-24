@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="custom-toolbar" style="margin-bottom: 10px;padding:10px;margin-top:4px">
+    <!-- Logotipo -->
+    <a routerLink="/modules">
+        <img src="images/logo.jpg" alt="Logo" class="logo">
+      </a>
+  
+    <!-- Espacio flexible -->
+    <span class="flex-spacer"></span>
+    <button mat-raised-button [routerLink]="currentRoute === '/calendar' ? '/timetable' : '/calendar'" style="cursor: pointer;color:#ff4081;">
+        <mat-icon>{{ currentRoute === '/calendar' ? 'settings' : 'calendar_today' }}</mat-icon> {{ currentRoute === '/calendar' ? 'Horarios' : 'Citas' }}
+    </button>
+    <!-- Botón Cerrar sesión (solo en módulos y páginas protegidas) -->
+    <button mat-icon-button (click)="logout()" style="margin-left:30px"><mat-icon>logout</mat-icon></button>
+  </mat-toolbar>
+  

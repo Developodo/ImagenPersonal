@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <!-- Título con nombre del módulo -->
+
+  <!-- Título con icono y nombre del módulo -->
+  <div class="module-name" style="color: #ff4081">
+    <a
+      mat-icon-button
+      (click)="navigateToChooseModule()"
+      style="cursor: pointer;font-size: small;width: auto;"
+      class="back-button"
+    >
+      <mat-icon>arrow_back</mat-icon> Módulos
+    </a>
+    <div class="module-item">
+     
+      <h3 style="display:inline-block;font-size: 1.1rem;text-align: right;line-height: normal;"> <div
+        class="avatar"
+        [ngStyle]="{ 'background-image': 'url(' + getModuleImage() + ')' }" style="display: inline-block;"
+      ></div><span style="display: inline-block;  max-width: 50%;">{{ moduleName() }}</span></h3>
+      <button
+      mat-mini-fab
+      aria-label="Exportar"
+      style="margin-right: 10px"
+      (click)="exportData()"
+    >
+    <mat-icon>cloud_download</mat-icon>
+    </button>
+    </div>
+  </div>
+
+
+
+  <!-- Barra de búsqueda -->
+  <mat-form-field appearance="outline" class="search-bar" style="padding: 2%; width: 95%">
+    <mat-label>Buscar cliente... ({{nclients}})</mat-label>
+    <input matInput (input)="onSearchChange($event)" #searchInput />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+
+  <!-- Grid de clientes -->
+  <div class="clients-grid">
+    @for (client of filteredClients; track client) {
+    <mat-card class="client-card" (click)="navigateToClient(client.id)">
+      <mat-card-content>
+        <p class="client-data truncate">
+          {{ client.surname }}, {{ client.name }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+
+  <!-- Botón flotante para agregar -->
+  <button
+    mat-fab
+    color="primary"
+    class="add-button"
+    (click)="navigateToAddClient()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<app-footer></app-footer>

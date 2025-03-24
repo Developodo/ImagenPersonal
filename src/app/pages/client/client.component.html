@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+<!-- Título con icono y nombre del módulo -->
+<div
+  class="module-name"
+  style="cursor: pointer; color: #ff4081; font-size: larger"
+>
+  <a
+    mat-icon-button
+    (click)="navigateClients()"
+    style="cursor: pointer; color: #ff4081; border: 1px solid #ff4081"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <mat-select
+    [(value)]="selectedModule"
+    (selectionChange)="onModuleChange($event.value)"
+    style="flex-grow: 1; color: #ff4081; text-align: right; font-weight: bold"
+  >
+    <mat-option *ngFor="let module of modules" [value]="module.name">
+      <span
+        class="color-circle"
+        [ngStyle]="{ 'background-color': module.color || '#007bff' }"
+      ></span>
+      {{ module.name }}
+    </mat-option>
+  </mat-select>
+</div>
+<mat-card class="client-form" style="margin-top: 20px">
+  <mat-card-title style="display: flex; justify-content: space-between; align-items: right; margin-bottom: 20px;">{{
+    isNew ? "Añadir Nuevo Cliente" : "Editar Cliente"
+  }}
+  @if(!isNew){
+  <a
+  mat-button
+  color="warn"
+  (click)="openDeleteDialog()"
+  >Eliminar<mat-icon>delete</mat-icon></a>}
+</mat-card-title>
+
+  <form [formGroup]="clientForm" (ngSubmit)="saveClient()">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput id="name" formControlName="name" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input matInput id="surname" formControlName="surname" required />
+    </mat-form-field>
+
+    <div class="image-upload">
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        (change)="onFileSelected($event)"
+        #fileInput
+        hidden
+      />
+      <a
+        mat-raised-button
+        color="primary"
+        (click)="fileInput.click()"
+        *ngIf="!imagePreview"
+      >
+        <mat-icon>photo_camera</mat-icon> Subir Imagen
+      </a>
+
+      <div class="image-preview" *ngIf="imagePreview">
+        <img [src]="imagePreview" (click)="viewImage()" class="preview-image" />
+        <a
+          mat-icon-button
+          color="warn"
+          class="delete-btn"
+          (click)="deleteImage()"
+        >
+          <mat-icon>delete</mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Datos para el módulo {{ this.moduleName() }}</mat-label>
+      <textarea
+        matInput
+        id="data"
+        formControlName="data"
+        mat-autoresize
+        rows="5"
+        placeholder="Ingrese los datos con fechas de cada intervención"
+        autofocus
+      ></textarea>
+    </mat-form-field>
+    <div class="button-container">
+
+      <a
+        style="margin-right: 60px"
+        mat-button
+        color="warn"
+        (click)="navigateClients()"
+        >Cancelar</a
+      >
+
+      
+      <button mat-raised-button color="primary" type="submit">
+        {{ isNew ? "Añadir" : "Guardar" }}
+      </button>
+    </div>
+    <ul class="entries-list">
+      @for (e of this.clientData()[this.moduleName()]; track e; let idx =
+      $index) {
+      <li class="entry">
+        <div class="entry-content">
+          <ng-container *ngIf="editingIndex !== idx; else editMode">
+            <span class="text">{{ e }}</span>
+            <div class="buttons">
+              <a mat-icon-button color="primary" (click)="editEntry(idx, e)">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a mat-icon-button color="warn" (click)="deleteEntry(idx)">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </div>
+          </ng-container>
+
+          <ng-template #editMode>
+            <form [formGroup]="editForm">
+              <textarea
+                formControlName="editedText"
+                class="edit-area"
+              ></textarea>
+            </form>
+            <div class="buttons">
+              <a mat-icon-button color="primary" (click)="saveEdit(idx)">
+                <mat-icon>check</mat-icon>
+              </a>
+              <a mat-icon-button color="warn" (click)="cancelEdit()">
+                <mat-icon>close</mat-icon>
+              </a>
+            </div>
+          </ng-template>
+        </div>
+      </li>
+      }
+    </ul>
+  </form>
+</mat-card>
+
+<!-- 📺 Dialogo para ver imagen en grande -->
+<ng-template #imageDialog>
+  <div class="full-image-container">
+    <img [src]="imagePreview" class="full-image" />
+  </div>
+</ng-template>
+<app-footer></app-footer>

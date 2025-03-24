@@ -1,0 +1,21 @@
+<div class="container" (click)="focusInput()">
+  <img src="images/logo.jpg" alt="Logo" class="logo" />
+
+  <div class="pin-input" [class.shake]="isShaking()">
+    <input
+      #pinInput
+      type="number"
+      maxlength="4"
+      (input)="updatePin($event)"
+      [value]="pin()"
+      autofocus
+    />
+
+    <div class="circles">
+      @for (n of [0, 1, 2, 3];track n) {
+      <span [class.filled]="pin().length > n"></span>
+      }
+    </div>
+  </div>
+  <span style="color:rgb(223, 223, 223);font-size: smaller;">Developodo&#64;2025</span>
+</div>
