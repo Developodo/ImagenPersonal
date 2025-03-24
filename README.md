@@ -57,7 +57,7 @@ La aplicación se conecta a un back-end basado en **Firestore** para almacenar i
 
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/nombre-del-repositorio.git
+   git clone https://github.com/Developodo/ImagenPersonal.git
    ``` 
 
 2. Instalar dependencias:
