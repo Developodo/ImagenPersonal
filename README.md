@@ -1,4 +1,4 @@
-# Aplicación de Gestión para el Departamento de Imagen Personal del IES El Tablero
+# Aplicación de Gestión Clientes y Citas para el Departamento de Imagen Personal del IES El Tablero
 
 ## Descripción
 
