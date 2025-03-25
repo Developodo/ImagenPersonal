@@ -111,7 +111,7 @@ export class CalendarComponent {
     'Jueves',
     'Viernes',
   ]; // Días disponibles
-
+  availableModules:any=[];
   // Simulación de horas disponibles para cada módulo por día
   moduleHours: any = {};
 
@@ -247,18 +247,36 @@ export class CalendarComponent {
       arg.jsEvent.target.click();
       return;
     }
+    const dayOfWeek = this.getDayOfWeek(arg.date);
+    const selectedDay = this.availableDays[dayOfWeek - 1]; // Ej: 'Lunes', 'Martes', etc.
+    if (this.filterModule) {
+      const availableDays = this.moduleHours[this.filterModule] || {};
+  
+      if (!availableDays[selectedDay] || availableDays[selectedDay].length === 0) {
+        this.toastService.showInfo("El módulo seleccionado no tiene horario este día de la semana")
+        return; // Si el módulo filtrado no tiene horario en este día, no se abre el formulario
+      }
+    }
+  
+    
+    
     // Mostrar formulario para seleccionar módulo y cliente
     this.eventForm.controls['day'].enable();
     this.eventForm.reset(); // Limpiar formulario
     arg.jsEvent.stopPropagation();
     this.openModal(arg);
     // Seleccionamos el día automáticamente basado en la fecha
-    const dayOfWeek = this.getDayOfWeek(arg.date);
-    this.eventForm.patchValue({
-      day: this.availableDays[dayOfWeek - 1], // Asignamos el día de la semana
-    });
+    
+
+    this.eventForm.patchValue({ day: selectedDay });
 
     this.eventForm.controls['day'].disable();
+    this.availableModules = this.modules.filter((module) =>
+      this.moduleHours[module.name]?.[selectedDay]?.length > 0
+    );
+    if(this.availableModules.lenth==0){
+      this.toastService.showInfo("No existen horarios establecidos para los módulos en este día")
+    }
   }
 
   getDayOfWeek(date: string): number {

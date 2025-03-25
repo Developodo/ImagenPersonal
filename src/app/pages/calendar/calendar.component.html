@@ -69,7 +69,7 @@
             formControlName="module"
             (selectionChange)="onModuleChange($event.value)"
           >
-            <mat-option *ngFor="let module of modules" [value]="module.name">
+            <mat-option *ngFor="let module of availableModules" [value]="module.name">
               <span
                 class="color-circle"
                 [ngStyle]="{ 'background-color': module.color || '#007bff' }"
