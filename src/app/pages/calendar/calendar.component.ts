@@ -282,8 +282,8 @@ export class CalendarComponent {
     }
     if(this.filterModule && this.availableModules.length>0){
       this.eventForm.controls['module'].setValue(this.filterModule);
-      //this.cdr.detectChanges();
-      
+      //detect horario
+      this.onModuleChange(this.filterModule)
     }
   }
 
