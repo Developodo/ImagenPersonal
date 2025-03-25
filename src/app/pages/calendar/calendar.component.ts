@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
@@ -65,6 +66,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 export class CalendarComponent {
   @ViewChild('modal') modal!: ElementRef;
   @ViewChild('calendar') calendarElement!: FullCalendarComponent;
+  @ViewChild('moduleselected', { static: false }) moduleselected! : MatSelect;
   isZoomedIn: boolean = false; // Variable para controlar si estamos en vista de zoom
   currentMonth: any = undefined;
   @ViewChild('sclients') matSelect: MatSelect | undefined;
@@ -121,7 +123,8 @@ export class CalendarComponent {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private toastService: ToastService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private cdr: ChangeDetectorRef
   ) {
     localStorage.removeItem('searchTerm');
     //this.firestore.saveModuleHours(this.moduleHours)
@@ -276,6 +279,11 @@ export class CalendarComponent {
     );
     if(this.availableModules.lenth==0){
       this.toastService.showInfo("No existen horarios establecidos para los módulos en este día")
+    }
+    if(this.filterModule && this.availableModules.length>0){
+      this.eventForm.controls['module'].setValue(this.filterModule);
+      //this.cdr.detectChanges();
+      
     }
   }
 
