@@ -68,6 +68,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 1.2em;
 }
 
+.fc-daygrid-day-events[data-event-count="0"]::before,
+.fc-daygrid-day-events:not([data-event-count])::before {
+  background-color: white; /* O `transparent` si prefieres ocultarlo */
+  color: transparent; /* Oculta el texto también */
+  border: none; /* Opcional, elimina el borde si hay */
+}
+
 .show{
   display:block !important;
 }

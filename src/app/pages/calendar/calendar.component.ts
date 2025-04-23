@@ -335,6 +335,7 @@ export class CalendarComponent {
         const eventCount = container.querySelectorAll(
           '.fc-daygrid-event-harness'
         ).length;
+        console.log(eventCount)
         if (eventCount > 0) {
           const dateElement = container.parentElement?.querySelector(
             '.fc-daygrid-day-number'
